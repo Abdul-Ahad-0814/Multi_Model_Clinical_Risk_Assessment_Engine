@@ -1,0 +1,10 @@
+age
+gender
+systolic_bp
+diastolic_bp
+glucose
+cholesterol
+bmi
+smoking
+alcohol
+family_history
