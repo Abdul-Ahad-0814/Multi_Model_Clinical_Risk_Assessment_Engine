@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stage-1 Risk Screening</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7f9fc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .card {
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .top-disease {
+            border: 2px solid #0d6efd;
+        }
+        .disclaimer {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 20px;
+        }
+        .notes {
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Stage-1 Risk Screening Results</h1>
+
+    <div class="row justify-content-center">
+        {% for disease, prob in ranking %}
+        <div class="col-md-4">
+            <div class="card {% if disease == top_disease %}top-disease{% endif %} text-center p-3">
+                <h4 class="card-title">{{ disease | capitalize }}</h4>
+                <p class="card-text display-6">{{ '%.2f'|format(prob * 100) }}%</p>
+                {% if disease == top_disease %}
+                <span class="badge bg-primary">Highest Risk</span>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="notes">
+        <h5>Medical Notes:</h5>
+        <ul>
+            <li>These probabilities are based on initial screening data.</li>
+            <li>Higher risk does not confirm a diagnosis; further testing is recommended.</li>
+            <li>Values such as age, blood pressure, and glucose influence the risk prediction.</li>
+        </ul>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('stage2', disease=top_disease) }}" class="btn btn-lg btn-primary">
+            Continue to Stage-2 for {{ top_disease | capitalize }}
+        </a>
+    </div>
+
+    <div class="disclaimer text-center">
+        <p>Disclaimer: This tool is for educational purposes only. It does not replace professional medical advice, diagnosis, or treatment.</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

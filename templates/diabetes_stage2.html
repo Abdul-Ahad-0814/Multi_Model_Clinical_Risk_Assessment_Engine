@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diabetes Stage-2 Inputs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f4f6f9; font-family: 'Segoe UI', sans-serif; }
+        .card { margin-top: 30px; border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card p-4">
+        <h2 class="mb-4">Diabetes Risk Details</h2>
+        <form method="POST">
+            <div class="mb-3">
+                <label>Pregnancies</label>
+                <input type="number" name="Pregnancies" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Glucose</label>
+                <input type="number" name="Glucose" class="form-control" value="{{ session['stage1_data']['glucose'] }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Blood Pressure</label>
+                <input type="number" name="BloodPressure" class="form-control" value="{{ session['stage1_data']['diastolic_bp'] }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Skin Thickness</label>
+                <input type="number" name="SkinThickness" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Insulin</label>
+                <input type="number" name="Insulin" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label>BMI</label>
+                <input type="number" step="0.1" name="BMI" class="form-control" value="{{ session['stage1_data']['bmi'] }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Diabetes Pedigree Function</label>
+                <input type="number" step="0.001" name="DPF" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Age</label>
+                <input type="number" name="Age" class="form-control" value="{{ session['stage1_data']['age'] }}" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Predict Risk</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

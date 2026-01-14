@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stage 2: Detailed Inputs</title>
+</head>
+<body>
+    <h1>Stage 2: Additional Inputs</h1>
+
+    {% for disease in diseases %}
+        <h2>{{ disease|capitalize }} Inputs</h2>
+        <form method="POST" action="/stage2">
+            <input type="hidden" name="disease" value="{{ disease }}">
+            
+            <!-- Hidden Stage-1 inputs -->
+            {% for key, value in stage1_input.items() %}
+                <input type="hidden" name="{{ key }}" value="{{ value }}">
+            {% endfor %}
+
+            {% if disease == 'hypertension' %}
+                Age: <input type="number" name="Age" value="{{ stage1_input.age }}" required><br><br>
+                Salt Intake: <input type="number" name="Salt_Intake" required><br><br>
+                Stress Score: <input type="number" name="Stress_Score" required><br><br>
+                BP History: 
+                <select name="BP_History" required>
+                    <option value="0">None</option>
+                    <option value="1">Mild</option>
+                    <option value="2">Severe</option>
+                </select><br><br>
+                Sleep Duration: <input type="number" name="Sleep_Duration" required><br><br>
+                BMI: <input type="number" step="0.1" name="BMI" value="{{ stage1_input.bmi }}" required><br><br>
+                Medication: 
+                <select name="Medication" required>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select><br><br>
+                Family History: 
+                <select name="Family_History" required>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select><br><br>
+                Exercise Level: 
+                <select name="Exercise_Level" required>
+                    <option value="0">None</option>
+                    <option value="1">Moderate</option>
+                    <option value="2">High</option>
+                </select><br><br>
+                Smoking Status: 
+                <select name="Smoking_Status" required>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select><br><br>
+
+            {% elif disease == 'diabetes' %}
+                Age: <input type="number" name="Age" value="{{ stage1_input.age }}" required><br><br>
+                BMI: <input type="number" step="0.1" name="BMI" value="{{ stage1_input.bmi }}" required><br><br>
+                Glucose: <input type="number" name="Glucose" value="{{ stage1_input.glucose }}" required><br><br>
+                Blood Pressure: <input type="number" name="BloodPressure" value="{{ stage1_input.systolic_bp }}" required><br><br>
+                Diabetes Pedigree Function: <input type="number" step="0.01" name="DiabetesPedigreeFunction" required><br><br>
+                Family History: 
+                <select name="Family_History" required>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select><br><br>
+
+            {% elif disease == 'heart' %}
+                Age: <input type="number" name="Age" value="{{ stage1_input.age }}" required><br><br>
+                Cholesterol: <input type="number" name="Cholesterol" value="{{ stage1_input.cholesterol }}" required><br><br>
+                Systolic BP: <input type="number" name="Systolic_BP" value="{{ stage1_input.systolic_bp }}" required><br><br>
+                Diastolic BP: <input type="number" name="Diastolic_BP" value="{{ stage1_input.diastolic_bp }}" required><br><br>
+                BMI: <input type="number" step="0.1" name="BMI" value="{{ stage1_input.bmi }}" required><br><br>
+                Smoking Status:
+                <select name="Smoking_Status" required>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select><br><br>
+                Exercise Level:
+                <select name="Exercise_Level" required>
+                    <option value="0">None</option>
+                    <option value="1">Moderate</option>
+                    <option value="2">High</option>
+                </select><br><br>
+                Family History:
+                <select name="Family_History" required>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select><br><br>
+                Medication:
+                <select name="Medication" required>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select><br><br>
+            {% endif %}
+
+            <button type="submit">Predict Risk</button>
+        </form>
+        <hr>
+    {% endfor %}
+</body>
+</html>
